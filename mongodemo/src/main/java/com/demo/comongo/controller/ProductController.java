@@ -18,9 +18,13 @@ public class ProductController {
     public Product setupProductData(@RequestBody Product product){
         return productDao.insertProductData(product);
     }
-    @GetMapping("/products")
+    @GetMapping("/listProducts")
     public List<Product> getProductsData(){
         return productDao.getProducts();
+    }
+    @GetMapping("/productsSearch")
+    public List<Product> searchProductsWithName(@RequestParam("name") String name){
+        return productDao.searchProductByName(name);
     }
 
 }

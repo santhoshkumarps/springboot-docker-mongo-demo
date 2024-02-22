@@ -9,4 +9,5 @@ public interface ProductDao {
     Product insertProductData(Product product);
 
     List<Product> getProducts();
+    List<Product> searchProductByName(String productName);
 }

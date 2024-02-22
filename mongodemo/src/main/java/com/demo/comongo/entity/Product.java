@@ -16,9 +16,9 @@ public class Product {
 
     @Id
     private String id;
-
     private String name;
-
     private String description;
-
+    private Double productPrice;
+    private Integer noOfAvailableProducts;
+    private Boolean isAvailable;
 }
