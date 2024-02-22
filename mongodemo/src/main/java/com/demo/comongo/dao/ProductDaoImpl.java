@@ -5,6 +5,8 @@ import com.demo.comongo.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ProductDaoImpl implements ProductDao{
 
@@ -14,5 +16,9 @@ public class ProductDaoImpl implements ProductDao{
     @Override
     public Product insertProductData(Product product) {
         return productRepository.insert(product);
+    }
+    @Override
+    public List<Product> getProducts() {
+        return productRepository.findAll();
     }
 }

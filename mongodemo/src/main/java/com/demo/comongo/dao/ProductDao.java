@@ -2,8 +2,11 @@ package com.demo.comongo.dao;
 
 import com.demo.comongo.entity.Product;
 
+import java.util.List;
+
 public interface ProductDao {
 
-    public Product insertProductData(Product product);
+    Product insertProductData(Product product);
 
+    List<Product> getProducts();
 }
