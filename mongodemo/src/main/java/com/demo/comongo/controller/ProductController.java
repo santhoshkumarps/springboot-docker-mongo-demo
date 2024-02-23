@@ -3,9 +3,13 @@ package com.demo.comongo.controller;
 import com.demo.comongo.dao.ProductDao;
 import com.demo.comongo.entity.Product;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
+
+import static org.springframework.http.HttpStatus.*;
 
 @RestController
 @RequestMapping(path="/api")
@@ -15,16 +19,32 @@ public class ProductController {
     private ProductDao productDao;
 
     @PostMapping("/create")
-    public Product setupProductData(@RequestBody Product product){
-        return productDao.insertProductData(product);
+    public ResponseEntity<String> setupProductData(@RequestBody Product product){
+
+        var existingData = productDao.searchProductByName(product.getName());
+        if (Objects.nonNull(existingData)){
+            return ResponseEntity
+                    .status(CONFLICT)
+                    .body("Product already exists...!!!");
+        }
+        var insertedData = productDao.insertProductData(product);
+        return ResponseEntity.status(CREATED).body("Data Inserted Successfully: Generated ID:"+insertedData.getId());
     }
     @GetMapping("/listProducts")
-    public List<Product> getProductsData(){
-        return productDao.getProducts();
+    public ResponseEntity<List<Product>> getAllProductsData(){
+        var products = productDao.getProducts();
+        if (Objects.nonNull(products) && !products.isEmpty()){
+            return ResponseEntity.status(OK).body(products);
+        }
+            return ResponseEntity.status(NOT_FOUND).body(null);
     }
     @GetMapping("/productsSearch")
-    public List<Product> searchProductsWithName(@RequestParam("name") String name){
-        return productDao.searchProductByName(name);
+    public ResponseEntity<Product> searchProductsWithName(@RequestParam("name") String name){
+        var product = productDao.searchProductByName(name);
+        if (Objects.isNull(product)){
+            return ResponseEntity.status(NOT_FOUND).body(null);
+        }
+        return ResponseEntity.status(OK).body(product);
     }
 
 }

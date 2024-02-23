@@ -22,7 +22,8 @@ public class ProductDaoImpl implements ProductDao{
         return productRepository.findAll();
     }
     @Override
-    public List<Product> searchProductByName(String productName) {
+    public Product searchProductByName(String productName) {
         return productRepository.findByName(productName);
     }
+
 }
