@@ -1,0 +1,11 @@
+
+-- 1. Install Docker
+-- 2. Refer Cheat sheet for reference
+-- 3. list all containers using "docker ps"
+-- 4. copy docker-compose.yaml and modify according to yourself
+-- 5. it is better to put docker-compose.yaml in project directory
+-- 6. install the container which is mentioned in docker-compose.yaml using command: "docker-compose up -d"
+-- 7. This will start MongoDB and Mongo Express in the background.
+        You can then access Mongo Express by visiting "http://localhost:8081" in your web browser.
+        enter your username and password and done.
+-- 8. have a little knowledge on Mongo so that it is very easy to store data in NoSQL format than RDBMS
