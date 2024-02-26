@@ -47,4 +47,19 @@ public class ProductController {
         return ResponseEntity.status(OK).body(product);
     }
 
+    @PutMapping("/update")
+    public ResponseEntity<Product> updateProduct(@RequestBody Product product){
+        if (Objects.nonNull(product))
+            return ResponseEntity.status(OK).body(productDao.updateProducts(product));
+        return ResponseEntity.status(NOT_FOUND).body(null);
+    }
+
+    @DeleteMapping("/delete")
+    public ResponseEntity<String> deleteProduct(@RequestParam("id") String id){
+        if (Objects.isNull(id)){
+            return ResponseEntity.status(NOT_FOUND).body("please check details");
+        }
+        productDao.deleteProduct(id);
+        return ResponseEntity.status(OK).body("Product with ID "+id+" is deleted successfully");
+    }
 }
