@@ -9,4 +9,5 @@ import org.springframework.stereotype.Repository;
 public interface ProductRepository extends MongoRepository<Product,String> {
     @Query("{'name': {$regex: ?0, $options: 'i'}}")
     Product findByName(String name);
+    Boolean existsBySku(String sku);
 }
